@@ -48,6 +48,64 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
+  fun onEquals(view: View) {
+    if (lastNumeric) {
+      var tvValue = tvInput?.text.toString()
+      var prefix = ""
+      try {
+        if (tvValue.startsWith("-")) {
+          prefix = "-"
+          tvValue = tvValue.substring(1)
+        }
+        if (tvValue.contains("-")) {
+          var splitValue = tvValue.split("-")
+          var first = splitValue[0]
+          var second = splitValue[1]
+          if (prefix.isNotEmpty()) {
+            first = prefix + first
+          }
+          tvInput?.text = removeZeroAfterDot((first.toDouble() - second.toDouble()).toString())
+        }
+        if (tvValue.contains("+")) {
+          var splitValue = tvValue.split("+")
+          var first = splitValue[0]
+          var second = splitValue[1]
+          if (prefix.isNotEmpty()) {
+            first = prefix + first
+          }
+          tvInput?.text = removeZeroAfterDot((first.toDouble() + second.toDouble()).toString())
+        }
+        if (tvValue.contains("/")) {
+          var splitValue = tvValue.split("/")
+          var first = splitValue[0]
+          var second = splitValue[1]
+          if (prefix.isNotEmpty()) {
+            first = prefix + first
+          }
+          tvInput?.text = removeZeroAfterDot((first.toDouble() / second.toDouble()).toString())
+        }
+        if (tvValue.contains("*")) {
+          var splitValue = tvValue.split("*")
+          var first = splitValue[0]
+          var second = splitValue[1]
+          if (prefix.isNotEmpty()) {
+            first = prefix + first
+          }
+          tvInput?.text = removeZeroAfterDot((first.toDouble() * second.toDouble()).toString())
+        }
+      } catch (e: java.lang.ArithmeticException) {
+        e.printStackTrace()
+      }
+    }
+  }
+
+  private fun removeZeroAfterDot(result: String): String {
+    var value = result
+    if (result.contains(".0"))
+      value = result.substring(0, result.length - 2)
+    return value
+  }
+
   private fun isOperatorAdded(value: String): Boolean {
     return if (value.startsWith("-")) {
       false

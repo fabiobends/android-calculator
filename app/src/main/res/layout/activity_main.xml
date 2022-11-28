@@ -250,7 +250,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:backgroundTint="@color/medium_grey"
-            android:onClick="onDigit"
+            android:onClick="onEquals"
             android:text="@string/equals"
             android:textColor="@color/white" />
     </LinearLayout>
